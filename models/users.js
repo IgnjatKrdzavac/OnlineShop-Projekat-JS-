@@ -36,7 +36,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique:true
-      }
+      },
+      admin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+      },
   }, {
     sequelize,
     modelName: 'Users',

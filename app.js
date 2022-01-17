@@ -15,7 +15,13 @@ app.use('/admin', prodRoutes);
 app.use('/admin', orderRoutes);
 app.use('/admin', orderDetRoutes);
 
+app.get('/register', (req, res) => {
+    res.sendFile('register.html', { root: './static' });
+});
 
+app.get('/login', (req, res) => {
+    res.sendFile('login.html', { root: './static' });
+});
 
 app.listen({ port: 7000 }, async () => {
     await sequelize.authenticate();

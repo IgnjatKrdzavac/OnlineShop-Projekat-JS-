@@ -25,7 +25,7 @@ route.get('/users/:id', (req, res) => {
 
 route.post('/users', (req, res) => {
     
-    Users.create({email: req.body.email, password: req.body.password, firstname: req.body.firstname, lastname: req.body.lastname, phone: req.body.phone})
+    Users.create({email: req.body.email, password: req.body.password, firstname: req.body.firstname, lastname: req.body.lastname, phone: req.body.phone, admin: req.body.admin})
         .then( rows => res.json(rows) )
         .catch( err => res.status(500).json(err) );
 
@@ -40,6 +40,7 @@ route.put('/users/:id', (req, res) => {
             usr.firstname = req.body.firstname;
             usr.lastname = req.body.lastname;
             usr.phone = req.body.phone;
+            usr.admin = req.body.admin;
 
             usr.save()
                 .then( rows => res.json(rows) )
