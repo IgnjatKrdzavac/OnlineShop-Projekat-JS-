@@ -66,4 +66,5 @@ app.post('/login', (req, res) => {
 
 app.listen({ port: 9050 }, async () => {
     await sequelize.authenticate();
+    console.log("Server auth started");
 });

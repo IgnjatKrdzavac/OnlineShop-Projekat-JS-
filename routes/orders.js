@@ -36,7 +36,10 @@ route.put('/orders/:id', (req, res) => {
             order.amount = req.body.amount,
             order.shipName = req.body.shipName,
             order.shipAdress = req.body.shipAdress,
-            order.date = req.body.date
+            order.date = req.body.date,
+            order.userId = req.body.userId;
+
+
 
             order.save()
                 .then( rows => res.json(rows) )

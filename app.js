@@ -8,6 +8,9 @@ const orderDetRoutes = require('./routes/orderdetails');
 
 const path = require('path');
 
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
 const app = express();
 
 app.use('/admin', usrRoutes);
@@ -52,6 +55,10 @@ app.get('/register', (req, res) => {
 
 app.get('/login', (req, res) => {
     res.sendFile('login.html', { root: './static' });
+});
+
+app.get('/', authToken, (req, res) => {
+    res.sendFile('glavnaStr.html', { root: './static' });
 });
 
 app.use(express.static(path.join(__dirname, 'static')));

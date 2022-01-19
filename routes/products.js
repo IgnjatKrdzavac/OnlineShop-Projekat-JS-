@@ -1,4 +1,4 @@
-const { sequelize, Products} = require('../models');
+const { sequelize, Products,Users} = require('../models');
 const express = require('express');
 
 const route = express.Router();
@@ -8,7 +8,7 @@ route.use(express.urlencoded({ extended: true }));
 
 route.get('/products', (req, res) => {
 
-    Products.findAll()
+    Products.findAll({ include: ['user'] })
         .then( rows => res.json(rows) )
         .catch( err => res.status(500).json(err) );
     
@@ -23,12 +23,28 @@ route.get('/products/:id', (req, res) => {
 });
 
 
-route.post('/products', (req, res) => {
+/*route.post('/products', (req, res) => {
     
-    Products.create({name: req.body.name, price: req.body.price, weight: req.body.weight, shortDesc: req.body.shortDesc, sku: req.body.sku})
+    Products.create({name: req.body.name, price: req.body.price, weight: req.body.weight, shortDesc: req.body.shortDesc, sku: req.body.sku, userId: req.user.userId })
         .then( rows => res.json(rows) )
         .catch( err => res.status(500).json(err) );
 
+});*/
+
+route.post('/products', (req, res) => {
+    
+    Users.findOne({ where: { id: req.user.userId } })
+        .then( usr => {
+            if (usr.admin) {
+                Products.create({name: req.body.name, price: req.body.price, weight: req.body.weight, shortDesc: req.body.shortDesc, sku: req.body.sku, userId: req.user.userId })
+                    .then( rows => res.json(rows) )
+                    .catch( err => res.status(500).json(err) );
+            } else {
+                res.status(403).json({ msg: "Only admin can take this actions!!"});
+            }
+        })
+        .catch( err => res.status(500).json(err) );
+        
 });
 
 route.put('/products/:id', (req, res) => {
@@ -40,6 +56,7 @@ route.put('/products/:id', (req, res) => {
             prod.weight = req.body.weight;
             prod.shortDesc = req.body.shortDesc;
             prod.sku = req.body.sku;
+            prod.userId = req.body.userId;
 
             prod.save()
                 .then( rows => res.json(rows) )
