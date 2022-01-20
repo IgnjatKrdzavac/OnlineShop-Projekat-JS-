@@ -14,7 +14,7 @@ function init() {
                 const lst = document.getElementById('prodLst');
     
                 data.forEach( el => {
-                    lst.innerHTML += `<li>ID: ${el.id}, Name: ${el.name}, Price ${el.price}:</li>`;
+                    lst.innerHTML += `<li>ID: ${el.id}, Ime: ${el.name}, Cena: ${el.price}</li>`;
                 });
             });
 
@@ -56,7 +56,7 @@ function init() {
                     alert(el.msg);
                 } else {
                     console.log(el);
-                    document.getElementById('prodLst').innerHTML += `<li>ID: ${el.id}, Name: ${el.name}, Price ${el.price}:</li>`;
+                    document.getElementById('prodLst').innerHTML += `<li>ID: ${el.id}, Ime: ${el.name}, Cena: ${el.price}</li>`;
                 }
             });
     });
@@ -97,7 +97,7 @@ function init() {
                                         lst = document.getElementById('prodLst');
                                         
                                         data.forEach( el => {
-                                            lista += `<li>ID: ${el.id}, Name: ${el.name}, Price ${el.price}:</li>`;
+                                            lista += `<li>ID: ${el.id}, Ime: ${el.name}, Cena: ${el.price}</li>`;
                             });
 
                             lst.innerHTML = lista;

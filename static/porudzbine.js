@@ -14,7 +14,7 @@ function init() {
             const lst = document.getElementById('ordList');
 
             data.forEach( el => {
-                document.getElementById('ordList').innerHTML += `<li>ID: ${el.id}, Amount: ${el.amount}, ShipAdress: ${el.shipAdress}:</li>`;
+                document.getElementById('ordList').innerHTML += `<li>ID: ${el.id}, Iznos: ${el.amount}, Adresa kupca: ${el.shipAdress}</li>`;
             });
         });
 
@@ -54,7 +54,7 @@ document.getElementById('orderBtn').addEventListener('click', e => {
                 alert(el.msg);
             } else {
                 console.log(el);
-                document.getElementById('ordList').innerHTML += `<li>ID: ${el.id}, Amount: ${el.amount}, ShipAdress: ${el.shipAdress}:</li>`;
+                document.getElementById('ordList').innerHTML += `<li>ID: ${el.id}, Iznos: ${el.amount}, Adresa kupca: ${el.shipAdress}</li>`;
             }
         });
 });
@@ -95,7 +95,7 @@ document.getElementById('orderIdBtn').addEventListener('click', e => {
                                     lst = document.getElementById('ordList');
                                     
                                     data.forEach( el => {
-                                        lista += `<li>ID: ${el.id}, Amount: ${el.amount}, ShipAdress: ${el.shipAdress}:</li>`;
+                                        lista += `<li>ID: ${el.id}, Iznos: ${el.amount}, Adresa kupca: ${el.shipAdress}</li>`;
                         });
 
                         lst.innerHTML = lista;

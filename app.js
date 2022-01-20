@@ -5,6 +5,7 @@ const usrRoutes = require('./routes/users');
 const prodRoutes = require('./routes/products');
 const orderRoutes = require('./routes/orders');
 const orderDetRoutes = require('./routes/orderdetails');
+const infoRoutes = require('./routes/informations');
 
 const path = require('path');
 
@@ -17,6 +18,7 @@ app.use('/admin', usrRoutes);
 app.use('/admin', prodRoutes);
 app.use('/admin', orderRoutes);
 app.use('/admin', orderDetRoutes);
+app.use('/admin', infoRoutes);
 
 
 function getCookies(req) {

@@ -14,7 +14,7 @@ function init() {
             const lst = document.getElementById('orderDetList');
 
             data.forEach( el => {
-                document.getElementById('orderDetList').innerHTML += `<li>ID: ${el.id}, Name: ${el.name}, Price: ${el.price}:</li>`;
+                document.getElementById('orderDetList').innerHTML += `<li>ID: ${el.id}, Naziv porudzbine: ${el.name}, Cena: ${el.price}</li>`;
             });
         });
 
@@ -58,7 +58,7 @@ document.getElementById('detailBtn').addEventListener('click', e => {
                 alert(el.msg);
             } else {
                 console.log(el);
-                document.getElementById('orderDetList').innerHTML += `<li>ID: ${el.id}, Name: ${el.name}, Price: ${el.price}:</li>`;
+                document.getElementById('orderDetList').innerHTML += `<li>ID: ${el.id}, Naziv porudzbine: ${el.name}, Cena: ${el.price}</li>`;
             }
         });
 });

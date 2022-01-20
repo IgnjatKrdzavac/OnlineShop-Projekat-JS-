@@ -56,7 +56,7 @@ route.put('/products/:id', (req, res) => {
             prod.weight = req.body.weight;
             prod.shortDesc = req.body.shortDesc;
             prod.sku = req.body.sku;
-            prod.userId = req.body.userId;
+            prod.userId = req.user.userId;
 
             prod.save()
                 .then( rows => res.json(rows) )
