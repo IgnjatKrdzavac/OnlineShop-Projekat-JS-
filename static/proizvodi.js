@@ -1,27 +1,8 @@
-
-
 function init() {
 
     const cookies = document.cookie.split('=');
     const token = cookies[cookies.length - 1];
 
-
-    
-
-    fetch('http://localhost:7000/admin/users', {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
-
-        .then( res => res.json() )
-        .then( data => {
-            const lst = document.getElementById('usrLst');
-
-            data.forEach( el => {
-                lst.innerHTML += `<li>ID: ${el.id}, Name: ${el.firstname}, E-mail: ${el.email}</li>`;
-            });
-        });
 
         fetch('http://localhost:7000/admin/products', {
             headers: {
@@ -80,63 +61,51 @@ function init() {
             });
     });
 
-
-    fetch('http://localhost:7000/admin/orders', {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-            .then( res => res.json() )
-            .then( data => {
-                const lst = document.getElementById('orderLst');
-    
-                data.forEach( el => {
-                    document.getElementById('orderLst').innerHTML += `<li>ID: ${el.id}, Amount: ${el.amount}, ShipAdress: ${el.shipAdress}:</li>`;
-                });
-            });
-
-    document.getElementById('orderBtn').addEventListener('click', e => {
+    document.getElementById('delProdBtn').addEventListener('click', e => {
         e.preventDefault();
 
         
-        const data = {
-            amount  : document.getElementById('orderAmount').value,
-            shipName : document.getElementById('orderShipName').value,
-            shipAdress :  document.getElementById('orderShipAdress').value,
-            date :  document.getElementById('orderDate').value,
-        };
-        
-        console.log(data)
+        id = document.getElementById('deleteProd').value;
+
+        document.getElementById('deleteProd').value = '';
        
-
-        document.getElementById('orderAmount').value = '';
-        document.getElementById('orderShipName').value = '';
-        document.getElementById('orderShipAdress').value = '';
-        document.getElementById('orderDate').value = '';
+        var url = 'http://localhost:7000/admin/products/id';
+        url = url.replace('id', id);
         
-
-        
-        fetch('http://localhost:7000/admin/orders', {
-            method: 'POST',
+        fetch(url, {
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
             
-            body: JSON.stringify(data)
+
         })
             .then( res => res.json() )
             .then( el => {
                 if (el.msg) {
                     alert(el.msg);
                 } else {
-                    console.log(el);
-                    document.getElementById('orderLst').innerHTML += `<li>ID: ${el.id}, Amount: ${el.amount}, ShipAdress: ${el.shipAdress}:</li>`;
+                              lista = '';
+                            fetch('http://localhost:7000/admin/products', {
+                                headers: {
+                                        'Authorization': `Bearer ${token}`
+                                }
+                             })
+                                .then( res => res.json() )
+                                .then( data => {
+                                        lst = document.getElementById('prodLst');
+                                        
+                                        data.forEach( el => {
+                                            lista += `<li>ID: ${el.id}, Name: ${el.name}, Price ${el.price}:</li>`;
+                            });
+
+                            lst.innerHTML = lista;
+                        });
+                    
                 }
             });
     });
-
-
 
 
     document.getElementById('logout').addEventListener('click', e => {

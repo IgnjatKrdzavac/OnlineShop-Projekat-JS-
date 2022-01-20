@@ -20,7 +20,7 @@ function init() {
                     alert("Invalid password");
                 } else {
                     document.cookie = `token=${el.token};SameSite=Lax`;
-                    window.location.href = 'glavnaStr.html';
+                    window.location.href = 'mainPage.html';
                    
                 }
             });

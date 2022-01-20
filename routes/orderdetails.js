@@ -1,4 +1,4 @@
-const { sequelize, OrderDetails} = require('../models');
+const { sequelize, OrderDetails,Users} = require('../models');
 const express = require('express');
 
 const route = express.Router();
@@ -21,13 +21,26 @@ route.get('/orderdetails/:id', (req, res) => {
 
 });
 
+
+
 route.post('/orderdetails', (req, res) => {
-
-    OrderDetails.create({ name: req.body.name, price: req.body.price, sku: req.body.sku, quantity: req.body.quantity, orderId: req.body.orderId, productId: req.body.productId })
-        .then( rows => res.json(rows) )
+    
+    Users.findOne({ where: { id: req.user.userId } })
+        .then( usr => {
+            if (usr.admin) {
+                OrderDetails.create({ name: req.body.name, price: req.body.price, sku: req.body.sku, quantity: req.body.quantity, orderId: req.body.orderId, productId: req.body.productId,userId: req.user.userId })
+                    .then( rows => res.json(rows) )
+                    .catch( err => res.status(500).json(err) );
+            } else {
+                res.status(403).json({ msg: "Only admin can take this actions!!"});
+            }
+        })
         .catch( err => res.status(500).json(err) );
-
+        
 });
+
+
+
 
 route.put('/orderdetails/:id', (req, res) => {
     
@@ -36,7 +49,10 @@ route.put('/orderdetails/:id', (req, res) => {
             orderdetail.name = req.body.name,
             orderdetail.price = req.body.price,
             orderdetail.sku = req.body.sku,
-            orderdetail.quantity = req.body.quantity
+            orderdetail.quantity = req.body.quantity,
+            orderdetail.orderId = req.body.orderId,
+            orderdetail.productId = req.body.productId
+            order.userId = req.user.userId;
 
             orderdetail.save()
                 .then( rows => res.json(rows) )

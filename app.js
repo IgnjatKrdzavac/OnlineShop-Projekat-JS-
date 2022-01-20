@@ -58,7 +58,7 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/', authToken, (req, res) => {
-    res.sendFile('glavnaStr.html', { root: './static' });
+    res.sendFile('mainPage.html', { root: './static' });
 });
 
 app.use(express.static(path.join(__dirname, 'static')));

@@ -7,9 +7,10 @@ route.use(express.urlencoded({ extended: true }));
 
 route.get('/orders', (req, res) => {
 
-    Orders.findAll({include: ['user']})
-        .then( rows => res.json(rows) )
+    Orders.findAll({ where: { userId: req.user.userId } })
+        .then( orders => res.json(orders) )
         .catch( err => res.status(500).json(err) );
+        
     
 });
 
@@ -23,7 +24,7 @@ route.get('/orders/:id', (req, res) => {
 
 route.post('/orders', (req, res) => {
 
-    Orders.create({ amount: req.body.amount, shipName: req.body.shipName, shipAdress: req.body.shipAdress, date: req.body.date, userId: req.body.userId })
+    Orders.create({ amount: req.body.amount, shipName: req.body.shipName, shipAdress: req.body.shipAdress, date: req.body.date, userId: req.user.userId })
         .then( rows => res.json(rows) )
         .catch( err => res.status(500).json(err) );
 
@@ -37,7 +38,7 @@ route.put('/orders/:id', (req, res) => {
             order.shipName = req.body.shipName,
             order.shipAdress = req.body.shipAdress,
             order.date = req.body.date,
-            order.userId = req.body.userId;
+            order.userId = req.user.userId;
 
 
 

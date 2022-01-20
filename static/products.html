@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang=en>
     <head>
-        <title>SJ Vezbe</title>
+        <title>Proizvodi</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <script src="skripta.js"></script>
+        <script src="proizvodi.js"></script>
     </head>
     <body onload="init()">
-        <div class="container">
-            <button type="button" id="logout" class="btn btn-primary">Log Out</button>
-        </div>
+    
         <div class="container">
             <div class="row">
-                <div class="col-3">
-                    <h2>Users:</h2>
-                    <ul id="usrLst"></ul>
-                </div>
                 <div class="col-4">
                     <h3>Add new Product(Admin only):</h3>
                     <label for="nameProd" class="form-label">Name:</label>
@@ -34,32 +28,27 @@
                     <textarea class="form-control" id="prodSku" name="prodSku" rows="1"></textarea>
                     <button type="submit" class="btn btn-primary" id="productIdBtn">Submit</button>
                 </div>
-                <div class="col-3">
+                <div class="col-5">
                     <h2>Products:</h2>
                     <ul id="prodLst"></ul>
                 </div>
+                <div class="col-3">
+                    <h2>Delete Product(Admin only):</h2>
+                    <label for="prodDelId" class="form-label">Product Id:</label>
+                    <textarea class="form-control" id="deleteProd" name="deleteProd" rows="1"></textarea>
+                    <button type="submit" class="btn btn-primary" id="delProdBtn">Submit</button>
+                    <ul id="prodLst"></ul>
+                </div>
             </div>
-        </div>
-        <hr>
-        <div class="container">
+            <hr>
             <div class="row">
-                <div class="col"> 
-                    <h3>Add new Order(not Admin only):</h3>
-                    <label for="amountOrd" class="form-label">Amount:</label>
-                    <textarea class="form-control" id="orderAmount" name="orderAmount" rows="1"></textarea>
-                    <label for="shipNameOrd" class="form-label">Ship name:</label>
-                    <textarea class="form-control" id="orderShipName" name="orderShipName" rows="1"></textarea>
-                    <label for="shipAdressOrd" class="form-label">Ship adress:</label>
-                    <textarea class="form-control" id="orderShipAdress" name="orderShipAdress" rows="1"></textarea>
-                    <label for="dateOrd" class="form-label">Date:</label>
-                    <textarea class="form-control" id="orderDate" name="orderDate" rows="1"></textarea>
-                    <button type="submit" class="btn btn-primary" id="orderBtn">Submit</button>
-                </div>
-                <div class="col-6">
-                    <h2>Orders:</h2>
-                    <ul id="orderLst"></ul>
+                <div class="container">
+                    <button type="button" id="logout" class="btn btn-primary">Log Out</button>
                 </div>
             </div>
+           </div>
         </div>
+    
+    
     </body>
 </html>
