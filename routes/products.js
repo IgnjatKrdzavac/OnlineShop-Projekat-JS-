@@ -23,15 +23,15 @@ route.get('/products/:id', (req, res) => {
 });
 
 
-/*route.post('/products', (req, res) => {
+route.post('/products', (req, res) => {
     
     Products.create({name: req.body.name, price: req.body.price, weight: req.body.weight, shortDesc: req.body.shortDesc, sku: req.body.sku, userId: req.user.userId })
         .then( rows => res.json(rows) )
         .catch( err => res.status(500).json(err) );
 
-});*/
+});
 
-route.post('/products', (req, res) => {
+/*route.post('/products', (req, res) => {
     
     Users.findOne({ where: { id: req.user.userId } })
         .then( usr => {
@@ -40,12 +40,12 @@ route.post('/products', (req, res) => {
                     .then( rows => res.json(rows) )
                     .catch( err => res.status(500).json(err) );
             } else {
-                res.status(403).json({ msg: "Only admin can take this actions!!"});
+                res.status(403).json({ msg: "BLAH!!"});
             }
         })
         .catch( err => res.status(500).json(err) );
         
-});
+});*/
 
 route.put('/products/:id', (req, res) => {
     

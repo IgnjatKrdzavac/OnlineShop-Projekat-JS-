@@ -22,22 +22,22 @@ route.get('/informations/:id', (req, res) => {
 
 });
 
+route.post('/products', (req, res) => {
+    
+    Products.create({name: req.body.name, price: req.body.price, weight: req.body.weight, shortDesc: req.body.shortDesc, sku: req.body.sku, userId: req.user.userId })
+        .then( rows => res.json(rows) )
+        .catch( err => res.status(500).json(err) );
 
+});
 
 
 route.post('/informations', (req, res) => {
     
-    Users.findOne({ where: { id: req.user.userId } })
-        .then( usr => {
-            if (usr.admin) {
-                Informations.create({aboutUs: req.body.aboutUs, deliveryPriceList: req.body.deliveryPriceList, privacyProtection: req.body.privacyProtection, methodOfPayment: req.body.methodOfPayment, termsOfPurchase: req.body.termsOfPurchase, userId: req.user.userId })
-                    .then( rows => res.json(rows) )
-                    .catch( err => res.status(500).json(err) );
-            } else {
-                res.status(403).json({ msg: "Only admin can take this actions!!"});
-            }
-        })
-        .catch( err => res.status(500).json(err) );
+
+      Informations.create({aboutUs: req.body.aboutUs, deliveryPriceList: req.body.deliveryPriceList, privacyProtection: req.body.privacyProtection, methodOfPayment: req.body.methodOfPayment, termsOfPurchase: req.body.termsOfPurchase, userId: req.user.userId })
+            .then( rows => res.json(rows) )
+            .catch( err => res.status(500).json(err) );
+            
         
 });
 

@@ -23,20 +23,15 @@ route.get('/orderdetails/:id', (req, res) => {
 
 
 
+
+
+
+
 route.post('/orderdetails', (req, res) => {
-    
-    Users.findOne({ where: { id: req.user.userId } })
-        .then( usr => {
-            if (usr.admin) {
-                OrderDetails.create({ name: req.body.name, price: req.body.price, sku: req.body.sku, quantity: req.body.quantity, orderId: req.body.orderId, productId: req.body.productId,userId: req.user.userId })
-                    .then( rows => res.json(rows) )
-                    .catch( err => res.status(500).json(err) );
-            } else {
-                res.status(403).json({ msg: "Only admin can take this actions!!"});
-            }
-        })
-        .catch( err => res.status(500).json(err) );
-        
+ 
+       OrderDetails.create({ name: req.body.name, price: req.body.price, sku: req.body.sku, quantity: req.body.quantity, orderId: req.body.orderId, productId: req.body.productId,userId: req.user.userId })
+            .then( rows => res.json(rows) )
+            .catch( err => res.status(500).json(err) );     
 });
 
 

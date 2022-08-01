@@ -7,7 +7,7 @@ route.use(express.urlencoded({ extended: true }));
 
 route.get('/orders', (req, res) => {
 
-    Orders.findAll({ where: { userId: req.user.userId } })
+    Orders.findAll({  include: ['user'] })
         .then( orders => res.json(orders) )
         .catch( err => res.status(500).json(err) );
         
