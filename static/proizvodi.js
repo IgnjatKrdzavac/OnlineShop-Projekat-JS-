@@ -18,6 +18,8 @@ function init() {
                 });
             });
 
+            
+
     document.getElementById('productIdBtn').addEventListener('click', e => {
         e.preventDefault();
 

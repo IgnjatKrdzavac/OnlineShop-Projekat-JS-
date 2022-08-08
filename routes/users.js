@@ -54,31 +54,73 @@ route.post('/users', (req, res) => {
 
 route.put('/users/:id', (req, res) => {
     
-    Users.findOne({ where: { id: req.params.id } })
-        .then( usr => {
-            usr.email = req.body.email;
-            usr.password = req.body.password;
-            usr.firstname = req.body.firstname;
-            usr.lastname = req.body.lastname;
-            usr.phone = req.body.phone;
-            usr.admin = req.body.admin;
+    Users.findOne({ where: { id: req.user.userId } })
+    .then( usr => {
+       if(usr.admin){
 
-            usr.save()
-                .then( rows => res.json(rows) )
+            Users.findOne({ where: { id: req.params.id } })
+                .then( usr => {
+                    usr.email = req.body.email;
+                    usr.firstname = req.body.firstname;
+                    usr.lastname = req.body.lastname;
+                    usr.phone = req.body.phone;
+
+                    usr.save()
+                        .then( rows => res.json(rows) )
+                        .catch( err => res.status(500).json(err) );
+                })
                 .catch( err => res.status(500).json(err) );
-        })
-        .catch( err => res.status(500).json(err) );
+
+
+        }else{
+            res.status(403).json({ msg: "Only admin can take this actions!!"});
+        }
+    })
+    .catch( err => res.status(500).json(err) );
 
 });
 
+
+/*route.post('/orderdetails', (req, res) => {
+    
+    Users.findOne({ where: { id: req.user.userId } })
+        .then( usr => {
+            if (usr.admin) {
+                OrderDetails.create({ name: req.body.name, price: req.body.price, sku: req.body.sku, quantity: req.body.quantity, orderId: req.body.orderId, productId: req.body.productId,userId: req.user.userId })
+                    .then( rows => res.json(rows) )
+                    .catch( err => res.status(500).json(err) );
+            } else {
+                res.status(403).json({ msg: "Only admin can take this actions!!"});
+            }
+        })
+        .catch( err => res.status(500).json(err) );
+        
+});*/
+
+//id: req.params.id
+
 route.delete('/users/:id', (req, res) => {
 
-    Users.findOne({ where: { id: req.params.id } })
+    Users.findOne({ where: { id: req.user.userId } })
         .then( usr => {
-           
-                usr.destroy()
-                .then( rows => res.json(rows) )
-                .catch( err => res.status(500).json(err) );
+           if(usr.admin){
+
+                Users.findOne({ where: { id: req.params.id } })
+                    .then( usr1 => {
+                        
+                        usr1.destroy()
+                        .then( rows => res.json(rows) )
+                        .catch( err => res.status(500).json(err) );
+                    
+                    })
+                    .catch( err => res.status(500).json(err) );
+
+                        
+                
+            }else{
+                res.status(403).json({ msg: "Only admin can take this actions!!"});
+            }
+                
             
         })
         .catch( err => res.status(500).json(err) );
